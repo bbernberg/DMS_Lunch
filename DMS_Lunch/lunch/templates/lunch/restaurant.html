@@ -1,0 +1,12 @@
+<h1>{{ restaurant.name }}</h1>
+<p/>
+{{ restaurant.address }}
+<p/>
+
+<h3>Add Review:</h3>
+<form action="{% url 'add_review' restaurant.id %}" method="post">
+{% csrf_token %}
+	<textarea name="new_review" rows="4" cols="50"></textarea>
+	<br>
+	<input type="submit" value="Submit">
+</form>

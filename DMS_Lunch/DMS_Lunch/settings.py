@@ -69,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'DMS_Lunch.wsgi.application'
-
+LOGIN_REDIRECT_URL = '/lunch'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

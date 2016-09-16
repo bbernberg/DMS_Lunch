@@ -8,7 +8,7 @@
 
 <body>
     <div id="header">
-        <img id="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}">
+        <a href="{% url 'dashboard' %}"><img id="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}"></a>
         <div id="user_name">{{ user.username }}</div>
         <a id="log_out_link" href="{% url 'logout' %}">Log out</a>
     </div>

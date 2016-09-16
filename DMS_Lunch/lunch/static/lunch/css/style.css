@@ -1,0 +1,59 @@
+body {
+	margin: 0 0 0 0;
+}
+
+a {
+	text-decoration: none;	
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#header {
+	color: black;
+	background-color: #eae6e2;
+	width: 100%;
+	height: 60px;
+	position: relative;
+}
+
+#content {
+	margin: 8px 20px 8px 20px;
+}
+
+#header_logo {
+	height: 40px;
+	width: auto;
+	max-width: 100%;
+ 	position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);
+  	left: 20px;
+}
+
+#user_name {
+	color: black;
+	position: absolute;
+	right: 20px;
+	bottom: 48%;
+}
+
+#log_out_link {
+	color: black;
+	font-weight: bold;
+	position: absolute;
+	right: 20px;
+	top: 52%;
+}
+
+#dash_restaurant_link {
+	color: #4169E1;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#dash_restaurant_container {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

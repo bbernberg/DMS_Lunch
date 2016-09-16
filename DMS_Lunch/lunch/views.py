@@ -11,7 +11,8 @@ from lunch.models import Restaurant, Review
 
 @login_required
 def dashboard(request):
-	return HttpResponse("DMS Lunch Dashboard ({})".format(request.user.username))
+	restaurants = Restaurant.objects.exclude(thumbs_down_by_users__pk=request.user.pk)
+	return render(request, 'lunch/dashboard.html', {'user': request.user, 'restaurants': restaurants})
 
 @login_required
 def restaurant(request, restaurant_id):

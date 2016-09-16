@@ -1,0 +1,11 @@
+{% extends './lunch_base.html' %}
+
+{% block content %}
+<h1 id="dashboard_title">Lunch Dashboard</h1>
+{% for restaurant in restaurants %}
+	<div id="dash_restaurant_container">
+		<a id="dash_restaurant_link" href="{% url 'restaurant' restaurant_id=restaurant.pk %}">{{ restaurant.name }}</a>
+		<div id="restaurant_address">{{ restaurant.address }}</div>
+	</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}DMS Lunch Options{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'lunch/css/style.css' %}" />
+</head>
+
+<body>
+    <div id="header">
+        <img id="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}">
+        <div id="user_name">{{ user.username }}</div>
+        <a id="log_out_link" href="{% url 'logout' %}">Log out</a>
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

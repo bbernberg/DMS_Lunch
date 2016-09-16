@@ -17,15 +17,13 @@ def dashboard(request):
 @login_required
 def restaurant(request, restaurant_id):
 	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
-	return render(request, 'lunch/restaurant.html', {'restaurant': restaurant})
+	reviews = Review.objects.filter(restaurant__pk=restaurant_id)
+	return render(request, 'lunch/restaurant.html', {'restaurant': restaurant, 'reviews': reviews})
 
 def add_review(request, restaurant_id):
-	if request.user:
-		print ("User added review = {}".format(request.user))
-	else:
-		"No user logged in"
 	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
-	review = Review(text=request.POST['new_review'], date=timezone.now(), restaurant=restaurant)
+	review = Review(text=request.POST['new_review'], date=timezone.now(), restaurant=restaurant, author=request.user)
+	review.save()
 	return HttpResponseRedirect(reverse('restaurant', args=restaurant_id))
 
 def do_register(request):

@@ -8,4 +8,15 @@
 		<div id="restaurant_address">{{ restaurant.address }}</div>
 	</div>
 {% endfor %}
+{% if thumbs_down_restaurants|length %}
+	<div class="thumbs_down_list_container">
+		<div class="thumbs_down_title">Restaurants Given Thumbs Down</div>
+		<ul class="thumbs_down_list">
+			{% for restaurant in thumbs_down_restaurants %}
+				<li><a class="thumbs_down_restaurant_link" href="{% url 'restaurant' restaurant_id=restaurant.pk %}">{{ restaurant.name }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endif %}
+
 {% endblock %}

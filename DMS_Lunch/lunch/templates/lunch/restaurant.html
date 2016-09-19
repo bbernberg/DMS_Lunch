@@ -4,22 +4,31 @@
 {% block additional_js %}
 	<script>
 		$(document).ready(function(){
+			$.ajaxSetup({
+			  data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+			});			
 			$(".reply_link").click(function(event) {
 				var selector = "#" + event.target.id + ".add_comment_container";
 		    	$(selector).toggle();
-		    });			
+		    });		
 		});
 	</script>
 {% endblock %}
 
 {% block content %}
-<div class="name_and_thumb">
-	<span class="restaurant_name">{{ restaurant.name }}</span>
-	{% if thumbs_down %}
-		<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
-	{% endif %}
+<div class="restaurant_info_container">
+	<div class="name_and_thumb">
+		<span class="restaurant_name">{{ restaurant.name }}</span>
+		{% if thumbs_down %}
+			<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
+		{% endif %}
+	</div>
+	<div class="restaurant_address">{{ restaurant.address }}</div>
+	<a href="{% url 'update_thumbs_down' restaurant.pk %}" class="thumbs_down_link">
+		<div id="thumbs_down_text">{% if thumbs_down %}Remove{% else %}Add{% endif %} Thumbs Down</div>
+	</a>
 </div>
-<div class="restaurant_address">{{ restaurant.address }}</div>
+
 <span class="review_count">{{ reviews|length }} {% if reviews|length == 1 %}Review{% else %}Reviews{% endif %}</span>
 <hr class="review_horizontal_rule">
 <form action="{% url 'add_review' restaurant.id %}" method="post">

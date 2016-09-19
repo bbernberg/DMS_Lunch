@@ -156,4 +156,32 @@ a:hover {
 	font-weight: bold;
 }
 
+.thumbs_down_link {
+	color: #4169e1;
+	font-size: 14px;
+	font-weight: bold;
+}
 
+.restaurant_info_container {
+	padding-bottom: 20px;
+}
+
+.thumbs_down_list_container {
+	padding-top: 40px;
+}
+
+.thumbs_down_title {
+ 	color: gray;
+ 	font-size: 14px;
+ 	font-weight: bold;
+}
+
+.thumbs_down_restaurant_link {
+	color: gray;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.thumbs_down_list {
+	margin-top: 0;
+}

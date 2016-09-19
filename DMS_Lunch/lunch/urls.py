@@ -13,4 +13,5 @@ urlpatterns = [
     ), name='register'),
     url('^do-register/', views.do_register, name='do_register'),   
     url(r'^(?P<review_id>[0-9]+)/add_review_comment/$', views.add_review_comment, name='add_review_comment'),
+    url(r'^(?P<restaurant_id>[0-9]+)/update_thumbs_down/$', views.update_thumbs_down, name='update_thumbs_down'),
 ]

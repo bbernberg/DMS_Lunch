@@ -12,7 +12,8 @@ from lunch.models import Restaurant, Review, ReviewComment
 @login_required
 def dashboard(request):
 	restaurants = Restaurant.objects.exclude(thumbs_down_by_users__pk=request.user.pk)
-	return render(request, 'lunch/dashboard.html', {'user': request.user, 'restaurants': restaurants})
+	thumbs_down_restaurants = Restaurant.objects.filter(thumbs_down_by_users__pk=request.user.pk)
+	return render(request, 'lunch/dashboard.html', {'user': request.user, 'restaurants': restaurants, 'thumbs_down_restaurants': thumbs_down_restaurants})
 
 @login_required
 def restaurant(request, restaurant_id):
@@ -40,3 +41,12 @@ def do_register(request):
 	auth_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
 	login(request, auth_user)
 	return HttpResponseRedirect(reverse('dashboard'))
+
+def update_thumbs_down(request, restaurant_id):
+	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+	if restaurant.thumbs_down_by_users.all().filter(pk=request.user.pk).exists():
+		restaurant.thumbs_down_by_users.remove(request.user)
+	else:
+		restaurant.thumbs_down_by_users.add(request.user)
+	restaurant.save()
+	return HttpResponseRedirect(reverse('restaurant', args=restaurant_id))

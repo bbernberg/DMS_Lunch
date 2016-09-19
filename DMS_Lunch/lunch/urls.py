@@ -12,4 +12,5 @@ urlpatterns = [
             form_class=UserCreationForm
     ), name='register'),
     url('^do-register/', views.do_register, name='do_register'),   
+    url(r'^(?P<review_id>[0-9]+)/add_review_comment/$', views.add_review_comment, name='add_review_comment'),
 ]

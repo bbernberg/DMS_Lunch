@@ -16,6 +16,7 @@ class Review(models.Model):
 	date = models.DateTimeField('date posted')
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 	author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	comments = models.ManyToManyField('ReviewComment')
 	def __str__(self):
 		return self.text
 

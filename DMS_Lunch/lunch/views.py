@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from lunch.models import Restaurant, Review
+from lunch.models import Restaurant, Review, ReviewComment
 
 @login_required
 def dashboard(request):
@@ -18,13 +18,22 @@ def dashboard(request):
 def restaurant(request, restaurant_id):
 	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
 	reviews = Review.objects.filter(restaurant__pk=restaurant_id)
-	return render(request, 'lunch/restaurant.html', {'restaurant': restaurant, 'reviews': reviews})
+	thumbs_down = restaurant.thumbs_down_by_users.all().filter(pk=request.user.pk).exists()
+	return render(request, 'lunch/restaurant.html', {'restaurant': restaurant, 'reviews': reviews, 'thumbs_down': thumbs_down})
 
 def add_review(request, restaurant_id):
 	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
 	review = Review(text=request.POST['new_review'], date=timezone.now(), restaurant=restaurant, author=request.user)
 	review.save()
 	return HttpResponseRedirect(reverse('restaurant', args=restaurant_id))
+
+def add_review_comment(request, review_id):
+	review = get_object_or_404(Review, pk=review_id)
+	review_comment = ReviewComment(text=request.POST['new_review_comment'], date=timezone.now(), parent_review=review, author=request.user)
+	review_comment.save()
+	review.comments.add(review_comment)
+	review.save()
+	return HttpResponseRedirect(reverse('restaurant', args=str(review.restaurant.pk)))
 
 def do_register(request):
 	user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])

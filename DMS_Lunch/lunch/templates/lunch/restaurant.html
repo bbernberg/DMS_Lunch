@@ -1,21 +1,60 @@
 {% extends './lunch_base.html' %}
+{% load static %}
+
+{% block additional_js %}
+	<script>
+		$(document).ready(function(){
+			$(".reply_link").click(function(event) {
+				var selector = "#" + event.target.id + ".add_comment_container";
+		    	$(selector).toggle();
+		    });			
+		});
+	</script>
+{% endblock %}
 
 {% block content %}
-<h1>{{ restaurant.name }}</h1>
-<p/>
-{{ restaurant.address }}
-<p/>
-
+<div class="name_and_thumb">
+	<span class="restaurant_name">{{ restaurant.name }}</span>
+	{% if thumbs_down %}
+		<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
+	{% endif %}
+</div>
+<div class="restaurant_address">{{ restaurant.address }}</div>
+<span class="review_count">{{ reviews|length }} {% if reviews|length == 1 %}Review{% else %}Reviews{% endif %}</span>
+<hr class="review_horizontal_rule">
 <form action="{% url 'add_review' restaurant.id %}" method="post">
 {% csrf_token %}
 	<textarea name="new_review" rows="4" cols="50" placeholder="Add review..."></textarea>
 	<br>
 	<input type="submit" value="Submit">
 </form>
-<div id="review_container">
+<ul class="review_list">
 {% for review in reviews %}
-	<span id="review_author">{{ review.author.username }}</span><span id="review_date">{{ review.date|date:"F j, Y" }}</span>
-	<div id="review_text">{{ review.text }}</div>
+	<li class="review_list_item">
+		<span class="review_author">{{ review.author.username }}</span><span class="review_date">{{ review.date|date:"F j, Y" }}</span>
+		<div class="review_text">{{ review.text }}</div>
+		<a href="#" class="reply_link">
+			<div id="{{ review.id }}">Reply</div>
+		</a>
+		<div class="add_comment_container" id="{{ review.id }}">
+			<form action="{% url 'add_review_comment' review.id %}" method="post">
+			{% csrf_token %}
+				<textarea name="new_review_comment" rows="2" cols="50" placeholder="Add comment..."></textarea>
+				<br>
+				<input type="submit" value="Submit">
+			</form>	
+		</div>
+	{% if review.comments.all|length %}
+		<ul class="comment_list">
+		{% for comment in review.comments.all %}
+			<li class="comment_list_item">
+				<span class="comment_author">{{ comment.author.username }}</span><span class="comment_date">{{ comment.date|date:"F j, Y" }}</span>
+				<div class="comment_text">{{ comment.text }}</div>
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+	</li>
 {% endfor %}
-</div>
+</ul>
 {% endblock %}

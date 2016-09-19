@@ -58,26 +58,102 @@ a:hover {
 	padding-bottom: 10px;
 }
 
-#review_container {
-	padding-top: 30px;
+.review_list {
+	padding-top: 10px;
+	padding-left: 0px;
+	list-style-type: none;
 }
 
-#review_author {
+.review_author {
 	color: black;
 	font-weight: bold;
 	font-size: 16px;
 	padding-bottom: 2px;
 }
 
-#review_date {
+.review_date {
 	color: gray;
 	font-size: 12px;
 	padding-left: 4px;
 }
 
-#review_text {
+.review_text {
 	color: gray;
 	font-size: 14px;
+	padding-bottom: 6px;
+}
+
+.review_list_item {
+	padding-bottom: 10px;
+}
+
+.reply_link {
+	color: gray;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.comment_list {
+	list-style-type: none;
+	padding-top: 10px;
+}
+
+.comment_author {
+	color: black;
+	font-weight: bold;
+	font-size: 16px;
+	padding-bottom: 2px;
+}
+
+.comment_date {
+	color: gray;
+	font-size: 12px;
+	padding-left: 4px;
+}
+
+.comment_text {
+	color: gray;
+	font-size: 14px;
+}
+
+.comment_list_item {
+	padding-bottom: 10px;
+}
+
+.add_comment_container {
+	display: none;
+	padding-top: 10px;
+}
+
+.name_and_thumb {
+	vertical-align: middle;
+}
+
+.thumb_logo {
+	height: 30px;
+	width: 30px;
+	padding-left: 10px;
+}
+
+.restaurant_name {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.restaurant_address {
+	padding-top: 10px;
 	padding-bottom: 20px;
 }
+
+.review_horizontal_rule {
+	margin-top: 4px;
+	margin-bottom: 10px;
+}
+
+.review_count {
+	color: gray;
+	font-size: 14px;
+	font-weight: bold;
+}
+
 

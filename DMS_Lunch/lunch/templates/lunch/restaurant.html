@@ -16,17 +16,20 @@
 {% endblock %}
 
 {% block content %}
-<div class="restaurant_info_container">
+<div class="pbl">
 	<div class="name_and_thumb">
 		<span class="restaurant_name">{{ restaurant.name }}</span>
 		{% if thumbs_down %}
-			<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
+		<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
 		{% endif %}
 	</div>
-	<div class="restaurant_address">{{ restaurant.address }}</div>
-	<a href="{% url 'update_thumbs_down' restaurant.pk %}" class="thumbs_down_link">
-		<div id="thumbs_down_text">{% if thumbs_down %}Remove{% else %}Add{% endif %} Thumbs Down</div>
-	</a>
+	<div class="ptm pbl">{{ restaurant.address }}</div>
+	{% if restaurant.visited == False %}
+	<div class="pbl">
+		<button class="button" onclick="location.href='{% url 'mark_restaurant_visited' restaurant.pk %}'">Visited {{ restaurant.name }}?</button>
+	</div>
+	{% endif %}
+	<button class="button blue_button" onclick="location.href='{% url 'update_thumbs_down' restaurant.pk %}'">{% if thumbs_down %}Remove{% else %}Add{% endif %} Thumbs Down</button>
 </div>
 
 <span class="review_count">{{ reviews|length }} {% if reviews|length == 1 %}Review{% else %}Reviews{% endif %}</span>
@@ -35,11 +38,11 @@
 {% csrf_token %}
 	<textarea name="new_review" rows="4" cols="50" placeholder="Add review..."></textarea>
 	<br>
-	<input type="submit" value="Submit">
+	<input type="submit" value="Submit" class="small_button">
 </form>
 <ul class="review_list">
 {% for review in reviews %}
-	<li class="review_list_item">
+	<li class="pbm">
 		<span class="review_author">{{ review.author.username }}</span><span class="review_date">{{ review.date|date:"F j, Y" }}</span>
 		<div class="review_text">{{ review.text }}</div>
 		<a href="#" class="reply_link">
@@ -50,13 +53,13 @@
 			{% csrf_token %}
 				<textarea name="new_review_comment" rows="2" cols="50" placeholder="Add comment..."></textarea>
 				<br>
-				<input type="submit" value="Submit">
+				<input type="submit" value="Submit" class="small_button">
 			</form>	
 		</div>
 	{% if review.comments.all|length %}
 		<ul class="comment_list">
 		{% for comment in review.comments.all %}
-			<li class="comment_list_item">
+			<li class="pbm">
 				<span class="comment_author">{{ comment.author.username }}</span><span class="comment_date">{{ comment.date|date:"F j, Y" }}</span>
 				<div class="comment_text">{{ comment.text }}</div>
 			</li>

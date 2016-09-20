@@ -2,16 +2,25 @@
 
 {% block content %}
 <h1 id="dashboard_title">Lunch Dashboard</h1>
-{% for restaurant in restaurants %}
-	<div id="dash_restaurant_container">
-		<a id="dash_restaurant_link" href="{% url 'restaurant' restaurant_id=restaurant.pk %}">{{ restaurant.name }}</a>
-		<div id="restaurant_address">{{ restaurant.address }}</div>
-	</div>
-{% endfor %}
+
+{% if unvisited_restaurants|length %}
+	{% include './dashboard_restaurant_list.html' with dashboard_list_name="Unvisited Restaurants" dashboard_restaurant_list=unvisited_restaurants %}
+{% endif %}
+
+{% if visited_restaurants|length %}
+	{% include './dashboard_restaurant_list.html' with dashboard_list_name="Visited Restaurants" dashboard_restaurant_list=visited_restaurants %}
+{% endif %}
+
+{% if request.user.is_superuser %}
+<div class="ptl">
+	<button class="button" onclick="location.href='{% url 'add_restaurant' %}'">Add New Restaurant</button>
+</div>
+{% endif %}
+
 {% if thumbs_down_restaurants|length %}
-	<div class="thumbs_down_list_container">
-		<div class="thumbs_down_title">Restaurants Given Thumbs Down</div>
-		<ul class="thumbs_down_list">
+	<div class="ptx">
+		<div class="thumbs_down_title">Restaurants Given Thumbs Down:</div>
+		<ul class="mtn">
 			{% for restaurant in thumbs_down_restaurants %}
 				<li><a class="thumbs_down_restaurant_link" href="{% url 'restaurant' restaurant_id=restaurant.pk %}">{{ restaurant.name }}</a></li>
 			{% endfor %}

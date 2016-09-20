@@ -1,0 +1,15 @@
+{% extends './lunch_base.html' %}
+
+{% block content %}
+<h1> Add New Restaurant:</h1>
+<form action="{% url 'do_add_restaurant' %}" method="post">
+	{% csrf_token %}
+	Name:<br>
+	<input type="text" name="name" class="new_restaurant_field">
+	<br><br>
+	Address:<br>
+	<input type="text" name="address" class="new_restaurant_field">
+	<br><br>
+	<input type="submit" class="small_button" value="Submit">
+</form>
+{% endblock %}

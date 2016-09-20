@@ -1,0 +1,11 @@
+<div class="dashboard_list_container">
+	<div class="dashboard_section_title">{{ dashboard_list_name }}:</div>
+	<ul class="restaurant_list">
+		{% for restaurant in dashboard_restaurant_list %}
+			<li class="pts pbs">
+			<a class="dash_restaurant_link" href="{% url 'restaurant' restaurant_id=restaurant.pk %}">{{ restaurant.name }}</a>
+			<div class="dash_restaurant_address">{{ restaurant.address }}</div>
+			</li>
+		{% endfor %}
+	</ul>
+</div>

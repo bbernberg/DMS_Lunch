@@ -10,7 +10,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-#header {
+.header {
 	color: black;
 	background-color: #eae6e2;
 	width: 100%;
@@ -18,11 +18,11 @@ a:hover {
 	position: relative;
 }
 
-#content {
+.content {
 	margin: 8px 20px 8px 20px;
 }
 
-#header_logo {
+.header_logo {
 	height: 40px;
 	width: auto;
 	max-width: 100%;
@@ -32,14 +32,14 @@ a:hover {
   	left: 20px;
 }
 
-#user_name {
+.user_name {
 	color: black;
 	position: absolute;
 	right: 20px;
 	bottom: 48%;
 }
 
-#log_out_link {
+.log_out_link {
 	color: black;
 	font-weight: bold;
 	position: absolute;
@@ -47,15 +47,10 @@ a:hover {
 	top: 52%;
 }
 
-#dash_restaurant_link {
+.dash_restaurant_link {
 	color: #4169E1;
 	font-weight: bold;
 	font-size: 20px;
-}
-
-#dash_restaurant_container {
-	padding-top: 10px;
-	padding-bottom: 10px;
 }
 
 .review_list {
@@ -81,10 +76,6 @@ a:hover {
 	color: gray;
 	font-size: 14px;
 	padding-bottom: 6px;
-}
-
-.review_list_item {
-	padding-bottom: 10px;
 }
 
 .reply_link {
@@ -116,13 +107,10 @@ a:hover {
 	font-size: 14px;
 }
 
-.comment_list_item {
-	padding-bottom: 10px;
-}
-
 .add_comment_container {
 	display: none;
 	padding-top: 10px;
+	padding-left: 40px;
 }
 
 .name_and_thumb {
@@ -140,18 +128,13 @@ a:hover {
 	font-weight: bold;
 }
 
-.restaurant_address {
-	padding-top: 10px;
-	padding-bottom: 20px;
-}
-
 .review_horizontal_rule {
 	margin-top: 4px;
 	margin-bottom: 10px;
 }
 
 .review_count {
-	color: gray;
+	color: black;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -160,14 +143,6 @@ a:hover {
 	color: #4169e1;
 	font-size: 14px;
 	font-weight: bold;
-}
-
-.restaurant_info_container {
-	padding-bottom: 20px;
-}
-
-.thumbs_down_list_container {
-	padding-top: 40px;
 }
 
 .thumbs_down_title {
@@ -182,6 +157,85 @@ a:hover {
 	font-weight: bold;
 }
 
-.thumbs_down_list {
-	margin-top: 0;
+.add_restaurant_link {
+	font-size: 18px;
+	font-weight: bold;
+	color: black;
 }
+
+.visited_link {
+	font-size: 14px;
+	font-weight: bold;
+	color: black;
+}
+
+.restaurant_list {
+	list-style-type: none;	
+}
+
+.restaurant_list_item {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+.dashboard_section_title {
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+}
+
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.blue_button {
+	background-color: #4169E1;
+}
+
+.small_button{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.new_restaurant_field {
+	width: 260px;
+	height: 30px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.reset_password_link {
+	font-size: 14px;
+	font-weight: bold;
+	color: black;
+}
+
+.new_user_link {
+	font-size: 14px;
+	font-weight: bold;
+	color: #4169E1;
+}
+
+.register_login_link {
+	font-size: 14px;
+	font-weight: bold;
+	color: #4169E1;	
+}
+

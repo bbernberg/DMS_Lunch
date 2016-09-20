@@ -23,7 +23,10 @@
 		<img class="thumb_logo" src="{% static 'lunch/images/thumbs-down-icon.png' %}">
 		{% endif %}
 	</div>
-	<div class="ptm pbl">{{ restaurant.address }}</div>
+	<div class="ptm pbm">{{ restaurant.address }}</div>
+	{% if restaurant.latitude and restaurant.longitude %}
+	<div class="lat_long ptm pbl">Latitude: {{restaurant.latitude}} Longitude: {{restaurant.longitude}}</div>
+	{% endif %}
 	{% if restaurant.visited == False %}
 	<div class="pbl">
 		<button class="button" onclick="location.href='{% url 'mark_restaurant_visited' restaurant.pk %}'">Visited {{ restaurant.name }}?</button>
@@ -43,8 +46,8 @@
 <ul class="review_list">
 {% for review in reviews %}
 	<li class="pbm">
-		<span class="review_author">{{ review.author.username }}</span><span class="review_date">{{ review.date|date:"F j, Y" }}</span>
-		<div class="review_text">{{ review.text }}</div>
+		<span class="review_author {% if review.author == request.user %}user_review{% endif %}">{{ review.author.username }}</span><span class="review_date">{{ review.date|date:"F j, Y" }}</span>
+		<div class="review_text {% if review.author == request.user %}user_review{% endif %}">{{ review.text }}</div>
 		<a href="#" class="reply_link">
 			<div id="{{ review.id }}">Reply</div>
 		</a>

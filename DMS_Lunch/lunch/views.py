@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from geopy.geocoders import Nominatim
 from lunch.models import Restaurant, Review, ReviewComment
 
 @login_required
@@ -79,7 +80,10 @@ def add_restaurant(request):
 	return render(request, 'lunch/add_restaurant.html')	
 
 def do_add_restaurant(request):
-	restaurant = Restaurant(name=request.POST['name'], address=request.POST['address'])
+	geolocator = Nominatim()
+	address = request.POST['address']
+	location = geolocator.geocode(address)	
+	restaurant = Restaurant(name=request.POST['name'], address=address, latitude=location.latitude, longitude=location.longitude)
 	restaurant.save()
 	return HttpResponseRedirect(reverse('dashboard'))
 

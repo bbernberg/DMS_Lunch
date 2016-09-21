@@ -63,8 +63,8 @@
 		<ul class="comment_list">
 		{% for comment in review.comments.all %}
 			<li class="pbm">
-				<span class="comment_author">{{ comment.author.username }}</span><span class="comment_date">{{ comment.date|date:"F j, Y" }}</span>
-				<div class="comment_text">{{ comment.text }}</div>
+				<span class="comment_author {% if comment.author == request.user %}user_review{% endif %}">{{ comment.author.username }}</span><span class="comment_date">{{ comment.date|date:"F j, Y" }}</span>
+				<div class="comment_text {% if comment.author == request.user %}user_review{% endif %}">{{ comment.text }}</div>
 			</li>
 		{% endfor %}
 		</ul>

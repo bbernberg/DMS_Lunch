@@ -32,8 +32,9 @@ a:hover {
   	left: 20px;
 }
 
-.user_name {
+.user_name_link {
 	color: black;
+	font-weight: bold;
 	position: absolute;
 	right: 20px;
 	bottom: 48%;
@@ -247,3 +248,8 @@ a:hover {
 	font-style: italic;
 }
 
+.form_error {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: red;
+}

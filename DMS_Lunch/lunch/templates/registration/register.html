@@ -8,26 +8,31 @@
 <body>
   <div class="content">
     <h1>DMS Lunch Dashboard Registration</h1>
-    <form method="post" action="{% url 'do_register' %}">
+    <form method="post" action="{% url 'register' %}">
     {% csrf_token %}
       {% if form.error_dict %}
         <p class="error">Please fix the error.</p>
       {% endif %}
       {% if form.username.errors %}
-        {{ form.username.html_error_list }}
+        <div class="form_error">{{ form.username.errors.as_text|cut:"* " }}</div>
       {% endif %}
       <label for="id_username">Username:</label><br> {{ form.username }}<br>
       <div class="mbm"></div>
       {% if form.password1.errors %}
-        {{ form.password1.html_error_list }}
+        <div class="form_error">{{ form.password1.errors.as_text|cut:"* " }}</div>
       {% endif %}
       <label for="id_password1">Password:</label><br> {{ form.password1 }}<br>
       <div class="mbm"></div>
       {% if form.password2.errors %}
-        {{ form.password2.html_error_list }}
+        <div class="form_error">{{ form.password2.errors.as_text|cut:"* " }}</div>
       {% endif %}
       <label for="id_password2">Password (again):</label><br> {{ form.password2 }}<br>
       <br>
+      {% if form.email.errors %}
+        <div class="form_error">{{ form.email.errors.as_text|cut:"* " }}</div>
+      {% endif %}
+      <label for="id_email">Email:</label><br> {{ form.email }}<br>
+      <br>      
       <input type="submit" value="Register" class="button"/>
     </form>
     <br>

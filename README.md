@@ -27,3 +27,8 @@ User Profile
 Edit User Profile
 
 ![alt tag](screenshots/Edit_User_Profile.png)
+
+Add Restaurant
+
+![alt tag](screenshots/New_Restaurant.png)
+

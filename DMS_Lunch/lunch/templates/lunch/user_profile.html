@@ -1,8 +1,13 @@
 {% extends './lunch_base.html' %}
 
 {% block content %}
-	<div><strong>Username:</strong> {{ request.user.username }}<div>
-	<div><strong>Email:</strong> {{ request.user.email }}<div>
+	<br>
+	<div class="mbl">
+		<span class="user_profile_label">Username:</span><span> {{ request.user.username }}</span><br>
+	</div>
+	<div class="mbl">
+		<span class="user_profile_label">Email:</span><span> {{ request.user.email }}</span><br>
+	</div>
 
 	<button class="button blue_button" onclick="location.href='{% url 'edit_user_profile' %}'">Edit Profile</button>
 

@@ -32,12 +32,21 @@ a:hover {
   	left: 20px;
 }
 
+.dashboard_header_link {
+	color: black;
+	font-weight: bold;
+	position: absolute;
+	left: 220px;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+
 .user_name_link {
 	color: black;
 	font-weight: bold;
 	position: absolute;
 	right: 20px;
-	bottom: 48%;
+	bottom: 58%;
 }
 
 .log_out_link {
@@ -45,7 +54,7 @@ a:hover {
 	font-weight: bold;
 	position: absolute;
 	right: 20px;
-	top: 52%;
+	top: 58%;
 }
 
 .dash_restaurant_link {
@@ -252,4 +261,16 @@ a:hover {
 	padding-top: 6px;
 	padding-bottom: 6px;
 	color: red;
+}
+
+.user_profile_label {
+	color: black;
+	font-weight: bold;
+}
+
+input[id^="id"] {
+	height: 30px;
+	width: 200px;
+	padding-left: 6px;
+	padding-right: 6px;
 }

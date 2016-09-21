@@ -10,12 +10,12 @@
       {% if form.username.errors %}
         <div class="form_error">{{ form.username.errors.as_text|cut:"* " }}</div>
       {% endif %}
-      <label for="id_username">Username:</label><br> {{ form.username }}<br>
+      <label for="id_username" class="user_profile_label">Username:</label><br> {{ form.username }}<br>
       <div class="mbm"></div>
       {% if form.email.errors %}
         <div class="form_error">{{ form.email.errors.as_text|cut:"* " }}</div>
       {% endif %}
-      <label for="id_email">Email:</label><br> {{ form.email }}<br>
+      <label for="id_email" class="user_profile_label">Email:</label><br> {{ form.email }}<br>
       <br>      
       <input type="submit" value="Save" class="button blue_button mrl"/><button class="button" onclick="location.href='{% url 'user_profile' %}'">Cancel</button>
 

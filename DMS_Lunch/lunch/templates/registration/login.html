@@ -1,45 +1,38 @@
-{% load static %}
-<head>
-    <title>DMS Lunch Options</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'lunch/css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'lunch/css/oocss-space.css' %}" />    
-</head>
+{% extends './logged_out_base.html' %}
 
-<body>
-    <div class="content">
-        {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
+{% block content %}
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to access the DMS Lunch dashboard.</p>
         {% endif %}
+    {% endif %}
 
-        {% if next %}
-            {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
-            {% else %}
-            <p>Please login to access the DMS Lunch dashboard.</p>
-            {% endif %}
-        {% endif %}
+    <h1>Sign In</h1>
+    <form method="post" class="mtx" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+    <tr>
+        <td class="pbm">{{ form.username.label_tag }}</td>
+        <td class="pbm">{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td class="pbl">{{ form.password.label_tag }}</td>
+        <td class="pbl">{{ form.password }}</td>
+    </tr>
+    </table>
 
-        <h1>DMS Lunch Dashboard</h1>
-        <form method="post" class="mtx" action="{% url 'login' %}">
-        {% csrf_token %}
-        <table>
-        <tr>
-            <td class="pbm">{{ form.username.label_tag }}</td>
-            <td class="pbm">{{ form.username }}</td>
-        </tr>
-        <tr>
-            <td class="pbl">{{ form.password.label_tag }}</td>
-            <td class="pbl">{{ form.password }}</td>
-        </tr>
-        </table>
+    <input type="submit" value="Sign In" class="button"/>
+    <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
 
-        <input type="submit" value="Sign In" class="button"/>
-        <input type="hidden" name="next" value="{{ next }}"/>
-        </form>
-
-        <p><a href="{% url 'password_reset' %}" class="reset_password_link">Forget your password?</a></p>
-        <br>
-        <p><a href="{% url 'register' %}" class="new_user_link">Don't have an account? Sign up</a></p>
-    </div>
-</body>
+    <p><a href="{% url 'password_reset' %}" class="reset_password_link">Forget your password?</a></p>
+    <br>
+    <p><a href="{% url 'register' %}" class="new_user_link">Don't have an account? Sign up</a></p>
+{% endblock %}

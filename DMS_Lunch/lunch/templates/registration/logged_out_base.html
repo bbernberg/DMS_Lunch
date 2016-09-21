@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}DMS Lunch Options{% endblock %}</title>
+    <title>{% block title %}DMS Lunch{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'lunch/css/style.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'lunch/css/oocss-space.css' %}" />    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -11,10 +11,7 @@
 
 <body>
     <div class="header">
-        <a href="{% url 'dashboard' %}"><img class="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}"></a>
-        <a class="dashboard_header_link" href="{% url 'dashboard' %}">Home</a>
-        <a class="user_name_link" href="{% url 'user_profile' %}">{{ user.username }}</a>
-        <a class="log_out_link" href="{% url 'logout' %}">Log out</a>
+        <img class="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}">
     </div>
 
     <div class="content">

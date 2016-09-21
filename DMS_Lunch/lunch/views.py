@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 from django.urls import reverse
@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from geopy.geocoders import Nominatim
 from lunch.models import Restaurant, Review, ReviewComment
 from lunch.forms import UserCreationForm, UserEditForm
+
+geolocator = Nominatim()
 
 @login_required
 def dashboard(request):
@@ -87,12 +89,19 @@ def add_restaurant(request):
 	return render(request, 'lunch/add_restaurant.html')	
 
 def do_add_restaurant(request):
-	geolocator = Nominatim()
 	address = request.POST['address']
 	location = geolocator.geocode(address)	
 	restaurant = Restaurant(name=request.POST['name'], address=address, latitude=location.latitude, longitude=location.longitude)
 	restaurant.save()
 	return HttpResponseRedirect(reverse('dashboard'))
+
+def latitude_longitude_for_address(request):
+	address = request.GET['address']
+	location = geolocator.geocode(address)	
+	if location:
+		return JsonResponse({'latitude': location.latitude, 'longitude': location.longitude})
+	else:
+		return JsonResponse({})
 
 @login_required
 def user_profile(request):

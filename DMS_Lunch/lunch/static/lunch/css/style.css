@@ -274,3 +274,18 @@ input[id^="id"] {
 	padding-left: 6px;
 	padding-right: 6px;
 }
+
+.add_restaurant_label {
+	color: black;
+	font-weight: bold;
+}
+
+.latitude_longitude_container {
+	display: none;
+}
+
+.invalid_address_container {
+	display: none;
+	color: red;
+}
+

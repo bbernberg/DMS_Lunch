@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^do-add-restaurant/', views.do_add_restaurant, name='do_add_restaurant'),
     url(r'^user_profile/', views.user_profile, name='user_profile'),
     url(r'^edit_user_profile/', views.edit_user_profile, name='edit_user_profile'),
+    url(r'^latitude_longitude/$', views.latitude_longitude_for_address, name='latitude_longitude')
 ]

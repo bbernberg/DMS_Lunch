@@ -1,15 +1,42 @@
 {% extends './lunch_base.html' %}
 
+{% block additional_js %}
+
+<script>
+	$(document).ready(function(){
+		$("#address_field").keyup(function() {
+			$.get("{% url 'latitude_longitude' %}", {address : $("#address_field").val()}, function(data) {
+				if (data.hasOwnProperty('latitude')) {
+					$("#latitude_value").text(data['latitude'])
+					$("#longitude_value").text(data['longitude'])				
+					$(".latitude_longitude_container").show()
+					$(".invalid_address_container").hide()					
+				} else {
+					$(".latitude_longitude_container").hide()
+					$(".invalid_address_container").show()
+				}
+			});
+		});
+	});
+</script>
+
+{% endblock %}
+
 {% block content %}
 <h1> Add New Restaurant:</h1>
 <form action="{% url 'do_add_restaurant' %}" method="post">
 	{% csrf_token %}
-	Name:<br>
+	<span class="add_restaurant_label">Name:</span><br>
 	<input type="text" name="name" class="new_restaurant_field">
 	<br><br>
-	Address:<br>
-	<input type="text" name="address" class="new_restaurant_field">
+	<span class="add_restaurant_label">Address:</span><br>
+	<input type="text" name="address" class="new_restaurant_field" id="address_field">
 	<br><br>
+	<div class="latitude_longitude_container pbl">
+		<span class="add_restaurant_label pbs">Latitude:</span> <span id="latitude_value"></span><br>
+		<span class="add_restaurant_label">Longitude:</span> <span id="longitude_value"></span>
+	</div>
+	<div class="invalid_address_container pbl">Invalid Address</div>
 	<input type="submit" class="small_button" value="Submit">
 </form>
 {% endblock %}

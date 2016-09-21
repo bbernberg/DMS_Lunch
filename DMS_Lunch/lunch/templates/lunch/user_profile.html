@@ -1,0 +1,9 @@
+{% extends './lunch_base.html' %}
+
+{% block content %}
+	<div><strong>Username:</strong> {{ request.user.username }}<div>
+	<div><strong>Email:</strong> {{ request.user.email }}<div>
+
+	<button class="button blue_button" onclick="location.href='{% url 'edit_user_profile' %}'">Edit Profile</button>
+
+{% endblock %}

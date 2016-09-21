@@ -12,7 +12,7 @@
 <body>
     <div class="header">
         <a href="{% url 'dashboard' %}"><img class="header_logo" src="{% static 'lunch/images/DMS_Logo.png' %}"></a>
-        <div class="user_name">{{ user.username }}</div>
+        <a class="user_name_link" href="{% url 'user_profile' %}">{{ user.username }}</a>
         <a class="log_out_link" href="{% url 'logout' %}">Log out</a>
     </div>
 

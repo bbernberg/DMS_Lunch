@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from geopy.geocoders import Nominatim
 from lunch.models import Restaurant, Review, ReviewComment
+from lunch.forms import UserCreationForm, UserEditForm
 
 @login_required
 def dashboard(request):
@@ -54,11 +55,17 @@ def add_review_comment(request, review_id):
 	review.save()
 	return HttpResponseRedirect(reverse('restaurant', args=str(review.restaurant.pk)))
 
-def do_register(request):
-	user = User.objects.create_user(username=request.POST['username'], password=request.POST['password1'])
-	auth_user = authenticate(username=request.POST['username'], password=request.POST['password1'])
-	login(request, auth_user)
-	return HttpResponseRedirect(reverse('dashboard'))
+def user_register(request):
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password1'], email=form.cleaned_data['email'])
+			auth_user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+			login(request, auth_user)
+			return HttpResponseRedirect(reverse('dashboard'))
+	else:
+		form= UserCreationForm()
+	return render(request, 'registration/register.html', {'form': form, 'is_registration': True})
 
 def update_thumbs_down(request, restaurant_id):
 	restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
@@ -87,3 +94,18 @@ def do_add_restaurant(request):
 	restaurant.save()
 	return HttpResponseRedirect(reverse('dashboard'))
 
+@login_required
+def user_profile(request):
+	return render(request, 'lunch/user_profile.html')		
+
+@login_required
+def edit_user_profile(request):
+	user = request.user
+	if request.method == 'POST':
+		form = UserEditForm(request.POST, instance=user)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('user_profile'))
+	else:
+		form= UserEditForm(instance=user)
+	return render(request, 'lunch/edit_user_profile.html', {'form': form})

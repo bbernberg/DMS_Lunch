@@ -1,0 +1,24 @@
+{% extends './lunch_base.html' %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'edit_user_profile' %}">
+    {% csrf_token %}
+      {% if form.error_dict %}
+        <p class="error">Please fix the error.</p>
+      {% endif %}
+      {% if form.username.errors %}
+        <div class="form_error">{{ form.username.errors.as_text|cut:"* " }}</div>
+      {% endif %}
+      <label for="id_username">Username:</label><br> {{ form.username }}<br>
+      <div class="mbm"></div>
+      {% if form.email.errors %}
+        <div class="form_error">{{ form.email.errors.as_text|cut:"* " }}</div>
+      {% endif %}
+      <label for="id_email">Email:</label><br> {{ form.email }}<br>
+      <br>      
+      <input type="submit" value="Save" class="button blue_button mrl"/><button class="button" onclick="location.href='{% url 'user_profile' %}'">Cancel</button>
+
+    </form>
+
+{% endblock %}
